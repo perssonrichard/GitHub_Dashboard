@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu+Mono&display=swap');
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+ @-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+ @-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  min-height: 100vh;
+}
+
+/* fixed and fluid only on sm and up */
+@media (min-width: 768px) {
+  .left {
+      position:fixed;
+  }
+  .fixed {
+      min-height: 100vh;
+      min-width: 180px;
+      max-width: 180px
+  }
+  .col .fluid {
+     min-height: 100vh;
+  }
+  .flex-grow {
+     flex:1;
+  }
+
+  #topNav { 
+  width: calc(100vh-200px);
+  margin-left:180px;
+  height: 8vh;
+  background: #434343;  /* fallback for old browsers */
+  color: #f0f0f0
+  }
+
+  .navbar-brand {
+  color: #f0f0f0;
+  font-size: 26px;
+  }
+}
+
+#content {
+  margin: 12vh 5vh 0 5vh;
+}
+
+#sidebar {
+  background: #000000;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 0;
+}
+
+#sidebar .nav button {
+  background: none;
+  color: #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 24px;
+  width: 100%;
+  text-align: justify;
+  }
+
+#sidebar .nav i {
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#sidebar .nav button:hover {
+  background: none;
+  color: #5e5e5b;
+  text-decoration: none;
+}
+
+#sidebar .nav button i {
+  margin-right: 16px;
+}
+
+#github-button {
+  border: solid 1px #fff;
+}
+
+#logout-button {
+  border: solid 1px #fff;
+}
+
+#avatar {
+  padding: 10px;
+  border-radius: 75%;
+}
+
+#imgContainer {
+  border-bottom: 1px solid #fff;
+}
+
+#notification {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+#notification:hover {
+  color: #e35d5b;
+}
+
+#newNotification {
+  font-family: 'Ubuntu Mono', monospace;
+  margin-left: 6px;
+}
+
+#orgText {
+  font-family: 'Ubuntu Mono', monospace;
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
+}
+
+#orgDropdown {
+  background-color: #444;
+  color: #fff;
+  border: solid 1px #fff;
+}
+
+#orgDropdown:hover {
+  background-color: #2b2b2b;
+}
+
+#username {
+  font-family: 'Ubuntu Mono', monospace;
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+.list-group {
+  list-style: none;
+}
+
+#textLoggingIn {
+  font-size: 20px;
+}
+
+#textLoggingIn span {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+#textLoggingIn span:nth-child(2) {
+  animation-delay: .2s;
+}
+
+#textLoggingIn span:nth-child(3) {
+  animation-delay: .4s;
+}
+
+.textLoadingRepos {
+  font-size: 20px;
+  color: #1a1a1d;
+}
+
+.textLoadingRepos, #textLoadingSaving span {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.textLoadingRepos, #textLoadingSaving span:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.textLoadingRepos, #textLoadingSaving span:nth-child(3) {
+  animation-delay: .4s;
+}
+
+.organizationOption {
+  font-size: .875rem;
+}
+
+.organizationOption:hover {
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.repos a {
+  text-decoration: none;
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.navbar-brand {
+  font-family: 'Ubuntu Mono', monospace;
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
+}
+
+.sidebarCol {
+  padding: 0;
+}
+
+.currentOrgSpan {
+  font-family: 'Ubuntu Mono', monospace;
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
+}
+
+.cards {
+  height: 80vh;
+  overflow: auto;
+}
+
+#settingsCard {
+  overflow: auto;
+}
+
+.page-link {
+  border: none;
+  padding: 5px 10px 2px 5px;
+}
+
+.page-link:hover {
+  background-color: unset;
+}
+
+#repoDiv {
+  height: 100%;
+}
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+.settings label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 40px;
+	height: 20px;
+	background: grey;
+	display: block;
+	border-radius: 20px;
+	position: relative;
+}
+
+.settings label:after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	border-radius: 18px;
+	transition: 0.3s;
+}
+
+.settings input:checked + label {
+	background: #bada55;
+}
+
+.settings input:checked + label:after {
+	left: calc(100% - 2px);
+	transform: translateX(-100%);
+}
+
+.settings label:active:after {
+	width: 26px;
+}
+
+.fade-in {
+	-webkit-animation: fade-in 0.5s ease-in both;
+	        animation: fade-in 0.5s ease-in both;
+}
+
+.fade-out {
+	-webkit-animation: fade-out 0.5s ease-out both;
+	        animation: fade-out 0.5s ease-out both;
+}
+
+.pulsate-fwd {
+	-webkit-animation: pulsate-fwd 0.5s ease-in-out infinite both;
+	        animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+ @-webkit-keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+#repoDropdown {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+  z-index: 1100;
+}
+
+#repoDropdownButton {
+  padding: 2px 5px;
+  font-family: 'Ubuntu Mono', monospace;
+  background: #e53935;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #e35d5b, #e53935);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #e35d5b, #e53935); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 16px;
+  border: 1px solid #1a1a1d;
+}

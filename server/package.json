@@ -1,0 +1,25 @@
+{
+  "name": "examination-1dv612",
+  "version": "0.1.0",
+  "author": "Richard Persson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.lnu.se/1dv612/student/rp222gy/examination.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.lnu.se/1dv612/student/rp222gy/examination/issues"
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "serverless": "^1.66.0",
+    "uninstall": "0.0.0",
+    "uuid": "^7.0.2"
+  },
+  "devDependencies": {
+    "serverless-domain-manager": "^3.3.1",
+    "serverless-dotenv-plugin": "^2.3.2",
+    "serverless-finch": "^2.5.2",
+    "standard": "^14.3.3"
+  }
+}

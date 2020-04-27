@@ -1,0 +1,142 @@
+org: richard0persson
+app: examination-1dv612
+service: examination-1dv612
+
+plugins:
+  - serverless-finch
+  - serverless-domain-manager
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: serverlessUser
+  region: eu-west-1
+  environment:
+    tableNameWebSocket: ${self:custom.tableNameWebSocket}
+    tableNameUserSettings: ${self:custom.tableNameUserSettings}
+    GITHUB_CLIENT_ID: ${env:GITHUB_CLIENT_ID}
+  iamRoleStatements:
+      - Effect: Allow
+        Action:
+        - dynamodb:*
+        - ses:*
+        Resource: '*'
+
+custom: 
+  tableNameWebSocket: WebSocketUsers
+  tableNameUserSettings: UserSettings
+  client:
+    bucketName: github.perssonrichard.org
+    distributionFolder: ../client/build
+    errorDocument: index.html
+  customDomain:
+    domainName: github-server.perssonrichard.org
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+
+functions:
+  websocket-connect: 
+    handler: lambdas/websockets/connect.handler
+    events: 
+      - websocket:
+          route: $connect
+  websocket-disconnect:
+    handler: lambdas/websockets/disconnect.handler
+    events:
+      - websocket:
+          route: $disconnect
+  websocket-default:
+    handler: lambdas/websockets/default.handler
+    events: 
+      - websocket:
+          route: $default
+  websocket-message: 
+    handler: lambdas/websockets/message.handler
+    events: 
+      - websocket:
+          route: message
+  authorize:
+    handler: lambdas/http/authorization.handler
+    events:
+      - http:
+          path: authorize
+          method: GET
+          cors: true
+  settings-post:
+    handler: lambdas/http/settings.POSThandler
+    events:
+      - http:
+          path: settings
+          method: POST
+          cors: true
+  settings-get:
+    handler: lambdas/http/settings.GEThandler
+    events:
+      - http:
+          path: settings
+          method: GET
+          cors: true
+  webhook:
+    handler: lambdas/http/webhook.handler
+    events:
+      - http:
+          path: webhook
+          method: POST
+          cors: true
+  emailSettings:
+    handler: lambdas/http/emailSettings.handler
+    events:
+      - http:
+          path: emailSettings
+          method: POST
+          cors: true
+
+resources: 
+  Resources:
+    WebSocketUserTable: 
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableNameWebSocket}
+        AttributeDefinitions: 
+          - AttributeName: ID
+            AttributeType: S
+          - AttributeName: userID
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: ID
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UserIndex
+            KeySchema:
+              - AttributeName: userID
+                KeyType: HASH
+            Projection:
+              NonKeyAttributes:
+                - date
+              ProjectionType: INCLUDE
+        BillingMode: PAY_PER_REQUEST
+
+    UserSettingsTable: 
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableNameUserSettings}
+        AttributeDefinitions: 
+          - AttributeName: ID
+            AttributeType: N
+          - AttributeName: settings
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: ID
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: SettingsIndex
+            KeySchema:
+              - AttributeName: settings
+                KeyType: HASH
+            Projection:
+              NonKeyAttributes:
+                - date
+              ProjectionType: INCLUDE
+        BillingMode: PAY_PER_REQUEST
